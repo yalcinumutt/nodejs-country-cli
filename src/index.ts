@@ -24,7 +24,7 @@ program
 program
   .command('search <name>')
   .description('Search for a country by name')
-  .action(async (name) => {
+  .action(async (name: string) => {
     const s = ui.createSpinner();
     s.start(`Searching for "${name}"...`);
     try {
@@ -35,7 +35,7 @@ program
       } else {
         console.log(pc.red('\nCountry not found.'));
       }
-    } catch (error) {
+    } catch (error: any) {
       s.stop('Error');
       console.error(pc.red(`\n${error.message}`));
     }
@@ -44,7 +44,7 @@ program
 program
   .command('capital <name>')
   .description('Search for a country by its capital')
-  .action(async (name) => {
+  .action(async (name: string) => {
     const s = ui.createSpinner();
     s.start(`Searching for capital "${name}"...`);
     try {
@@ -55,7 +55,7 @@ program
       } else {
         console.log(pc.red('\nCapital not found.'));
       }
-    } catch (error) {
+    } catch (error: any) {
       s.stop('Error');
       console.error(pc.red(`\n${error.message}`));
     }
@@ -64,14 +64,14 @@ program
 program
   .command('region <name>')
   .description('List countries in a specific region (Africa, Americas, Asia, Europe, Oceania)')
-  .action(async (name) => {
+  .action(async (name: string) => {
     const s = ui.createSpinner();
     s.start(`Fetching countries in region "${name}"...`);
     try {
       const countries = await api.getCountriesByRegion(name);
       s.stop('Fetch complete');
       console.log('\n' + ui.formatCountryTable(countries));
-    } catch (error) {
+    } catch (error: any) {
       s.stop('Error');
       console.error(pc.red(`\n${error.message}`));
     }
@@ -87,7 +87,7 @@ program
       const countries = await api.getCountries();
       s.stop('Fetch complete');
       console.log('\n' + ui.formatCountryTable(countries));
-    } catch (error) {
+    } catch (error: any) {
       s.stop('Error');
       console.error(pc.red(`\n${error.message}`));
     }

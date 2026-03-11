@@ -1,12 +1,13 @@
 import pc from 'picocolors';
 import Table from 'cli-table3';
 import { intro, outro, spinner, select, text as promptText, note } from '@clack/prompts';
+import { Country } from './types.js';
 
 export const showIntro = () => {
   intro(pc.bgCyan(pc.black(' Country CLI ')));
 };
 
-export const showOutro = (message) => {
+export const showOutro = (message?: string) => {
   outro(pc.cyan(message || 'Goodbye!'));
 };
 
@@ -14,7 +15,7 @@ export const createSpinner = () => {
   return spinner();
 };
 
-export const formatCountryTable = (countries) => {
+export const formatCountryTable = (countries: Country | Country[]) => {
   const table = new Table({
     head: [
       pc.bold('Name'),
@@ -41,7 +42,7 @@ export const formatCountryTable = (countries) => {
   return table.toString();
 };
 
-export const formatDetailedCountry = (country) => {
+export const formatDetailedCountry = (country: Country) => {
   const info = [
     `${pc.bold('Name:')} ${country.name}`,
     `${pc.bold('Native Name:')} ${country.nativeName}`,
@@ -62,7 +63,7 @@ export const formatDetailedCountry = (country) => {
   note(info, `Country Details: ${country.name}`);
 };
 
-export const interactiveMode = async (api) => {
+export const interactiveMode = async (api: any) => {
   while (true) {
     const action = await select({
       message: 'Choose an action:',
@@ -97,7 +98,7 @@ export const interactiveMode = async (api) => {
         } else {
           outro(pc.red('Country not found.'));
         }
-      } catch (e) {
+      } catch (e: any) {
         s.stop('Error');
         outro(pc.red(e.message));
       }
@@ -124,7 +125,7 @@ export const interactiveMode = async (api) => {
         } else {
           outro(pc.red('Capital not found.'));
         }
-      } catch (e) {
+      } catch (e: any) {
         s.stop('Error');
         outro(pc.red(e.message));
       }
@@ -140,7 +141,7 @@ export const interactiveMode = async (api) => {
           { value: 'Europe', label: 'Europe' },
           { value: 'Oceania', label: 'Oceania' },
         ],
-      });
+      }) as string;
 
       if (typeof region === 'symbol') continue;
 
@@ -150,7 +151,7 @@ export const interactiveMode = async (api) => {
         const countries = await api.getCountriesByRegion(region);
         s.stop('Fetch complete');
         console.log(formatCountryTable(countries));
-      } catch (e) {
+      } catch (e: any) {
         s.stop('Error');
         outro(pc.red(e.message));
       }
