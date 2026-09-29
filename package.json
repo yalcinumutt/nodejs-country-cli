@@ -30,15 +30,15 @@
   },
   "homepage": "https://github.com/yalcinumutt/nodejs-country-cli#readme",
   "dependencies": {
-    "@clack/prompts": "^0.7.0",
-    "axios": "^1.6.0",
+    "@clack/prompts": "^1.8.1",
+    "axios": "^1.20.0",
     "cli-table3": "^0.6.3",
-    "commander": "^11.1.0",
+    "commander": "^15.0.0",
     "picocolors": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.8.0",
-    "tsx": "^4.0.0",
-    "typescript": "^5.2.2"
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }
